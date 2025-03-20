@@ -1,9 +1,6 @@
 name: "Setup Agentuity"
 description: "Setup Agentuity CLI"
-inputs:
-  api_key:
-    description: "API Key"
-    required: true
+author: "Agentuity"
 runs:
   using: "composite"
   steps:
@@ -14,9 +11,7 @@ runs:
         extract: true
         latest: true
         out-file-path: agentuity-release
-    - name: print agentuity version
-      run: ./agentuity-release/agentuity version
+    - name: add agentuity to PATH
+      run: echo "$GITHUB_WORKSPACE/agentuity-release" >> $GITHUB_PATH
       shell: bash
-    - name: set api key
-      run: echo "AUTH_API_KEY=${{ inputs.api_key }}" >> $GITHUB_ENV
-      shell: bash
+

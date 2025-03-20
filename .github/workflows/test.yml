@@ -14,13 +14,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
-      # Test the action from the local repository
-      - name: Test local action
+      # Setup the CLI
+      - name: Setup Agentuity CLI
         uses: ./
         with:
           api_key: ${{ secrets.AGENTUITY_API_KEY }}
-          
+      # Verify CLI works
       - name: Verify CLI works
-        run: agentuity whoami
+        run: agentuity version
         shell: bash
+          
