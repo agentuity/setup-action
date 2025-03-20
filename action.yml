@@ -1,0 +1,22 @@
+name: "Setup Agentuity"
+description: "Setup Agentuity CLI"
+inputs:
+  api_key:
+    description: "API Key"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: robinraju/release-downloader@v1
+      with:
+        repository: agentuity/cli
+        fileName: "agentuity_Linux_x86_64.tar.gz"
+        extract: true
+        latest: true
+        out-file-path: agentuity-release
+    - name: print agentuity version
+      run: ./agentuity-release/agentuity version
+      shell: bash
+    - name: set api key
+      run: echo "AUTH_API_KEY=${{ inputs.api_key }}" >> $GITHUB_ENV
+      shell: bash
